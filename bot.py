@@ -147,7 +147,7 @@ def main():
     threading.Thread(target=run_schedule, daemon=True).start()
     
     print("✅ Бот запущен и готов к работе!")
-    app.run_polling()
+app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
     main()
@@ -164,3 +164,4 @@ def run_fake_server():
         conn.close()
 
 Thread(target=run_fake_server, daemon=True).start()
+
