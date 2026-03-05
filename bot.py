@@ -125,9 +125,9 @@ async def list_clients(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     await update.message.reply_text(text)
 
-# 🔍 Фоновая проверка (заглушка)
+# Фоновая проверка (заглушка)
 def check_ips():
-    print(f"🔍 Проверка IP... {datetime.now()}")
+    print(f"Проверка IP... {datetime.now()}")
 
 def run_schedule():
     schedule.every(6).hours.do(check_ips)
@@ -135,22 +135,23 @@ def run_schedule():
         schedule.run_pending()
         time.sleep(60)
 
-# 🧠 Запуск бота
+# Запуск бота
 def main():
     app = Application.builder().token(TOKEN).build()
-    
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("newclient", newclient))
     app.add_handler(CommandHandler("delete", delete_client))
     app.add_handler(CommandHandler("list", list_clients))
-    
+
     threading.Thread(target=run_schedule, daemon=True).start()
-    
-    print("✅ Бот запущен и готов к работе!")
-app.run_polling(drop_pending_updates=True)
+
+    print("Бот запущен и готов к работе!")
+    app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
     main()
+
 import asyncio
 from threading import Thread
 import socket
@@ -164,4 +165,3 @@ def run_fake_server():
         conn.close()
 
 Thread(target=run_fake_server, daemon=True).start()
-
