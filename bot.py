@@ -151,3 +151,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+import asyncio
+from threading import Thread
+import socket
+
+def run_fake_server():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(("0.0.0.0", 8080))
+    sock.listen(1)
+    while True:
+        conn, addr = sock.accept()
+        conn.close()
+
+Thread(target=run_fake_server, daemon=True).start()
